@@ -69,21 +69,44 @@ Kubernetes implementa **liveness** e **readiness probes**. Se un container non r
 
 **Kubernetes** offre service mesh integration, distributed tracing e gestione avanzata delle dipendenze tra servizi.
 
-## Svantaggi
+## Pro e Contro di Kubernetes
 
-### Kubernetes
+### Vantaggi
 
-- Curva di apprendimento ripida
-- Overhead operazionale significativo
-- Richiede cluster management expertise
-- Costi infrastrutturali elevati per progetti piccoli
+- Scalabilità automatica: Horizontal Pod Autoscaler adatta automaticamente le repliche in base a CPU/memoria
+- Self-healing: Riavvio automatico di container falliti e sostituzione di nodi unhealthy
+- Rolling updates: Deploy senza downtime con rollback automatico in caso di problemi
+- Multi-cloud portability: Stessa configurazione funziona su AWS, GCP, Azure, on-premise
+- Ecosystem ricco: Helm charts, Operators, service mesh (Istio), monitoring (Prometheus)
+- Resource management: Limiti e richieste di CPU/memoria per ottimizzazione delle risorse
+- Network policies: Controllo granulare del traffico tra servizi per sicurezza
+- Storage dinamico: Provisioning automatico di volumi persistenti
+- Service discovery nativo: DNS interno per comunicazione tra servizi
+- RBAC integrato: Controllo accessi fine-grained per utenti e servizi
 
-### Docker Compose
+### Svantaggi
 
-- Limitato a deployment single-host
-- No high availability nativa
-- Scaling manuale e limitato
-- Gestione secrets primitiva
+- Complessità estrema: Curva di apprendimento molto ripida, concetti astratti difficili
+- Overhead operazionale: Richiede team dedicato per setup, monitoring, troubleshooting
+- Resource intensive: Cluster minimo richiede 2-4GB RAM solo per i componenti di sistema
+- Debugging complesso: Log distribuiti, networking overlay, troubleshooting multi-layer
+- Configurazione verbosa: YAML complessi, facili errori di indentazione e sintassi
+- Vendor lock-in nascosto: Dipendenza da cloud provider per load balancer, storage
+- Costi elevati: Managed services costosi, nodi sempre attivi anche per carichi bassi
+- Security complexity: Superficie di attacco ampia, configurazioni security complesse
+- Breaking changes frequenti: API deprecation, necessità aggiornamenti frequenti
+- Latenza networking: Overhead di proxy, service mesh, multiple network hops
+
+### Svantaggi Docker Compose
+
+- Single-host only: No distribuzione multi-nodo, single point of failure
+- Scaling limitato: Solo vertical scaling, no load balancing automatico
+- No self-healing: Container falliti richiedono intervento manuale
+- Gestione secrets primitiva: File-based, no encryption, no rotazione automatica
+- Network isolation basic: Limited network policies e security controls
+- Storage locale: Volume bound al singolo host, no replica o backup automatici
+- No service discovery avanzato: Solo network aliases basic
+- Monitoring limitato: No metriche native, log centralization manuale
 
 ## Quando Usare Cosa
 
